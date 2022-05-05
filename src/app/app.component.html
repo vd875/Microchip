@@ -1,0 +1,106 @@
+
+<div id="div1">
+  <h1>Information</h1>
+  <br>
+  <br>
+  <div>
+    <h5>Please select the columns to display</h5>
+    
+  <div>
+    <div>
+        <button class="drop-toggle btn flat" (click)="showDropDown=!showDropDown">
+            <span>Selected {{5 - noOfFilteredColumns}} of 5</span> &nbsp;
+            <i class="fa fa-angle-down"></i>
+        </button>
+        <div class="drop-show" *ngIf="showDropDown">
+          <div *ngFor="let a of filteredColumns">
+            <input type="checkbox" id="{{a.name}}"  [(ngModel)]="a.visible"  (change)="getSelectedValue(a.name)" >
+            <label for="{{a.name}}">{{a.name}}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div  *ngIf="paginationFlag">
+    <h5> Current page number is {{pageNumber + 1}}</h5>
+    <h5> Please select the page number</h5>
+    <button *ngFor="let in of pageData ;let i = index" (click)="pageNumberSelected(i)">{{i+1}}</button>
+  </div>
+</div>
+<div id="div2">
+  <h2>
+    Pagnation
+    <label for="pagnation">No  </label>
+    <input type="checkbox" id="pagnation"
+                    class="checkbox" (change)="pagenationModeChanged()"/>
+        <label for="pagnation" class="toggle"></label>
+    <label for="pagnation">  Yes</label>
+  </h2>
+  <h2> Displaying {{displayCount}}</h2>
+  <div  *ngIf="paginationFlag">
+    <h5> Please select the number to display</h5>
+    <button (click)="setPagnationCount(10)">10</button>
+    <button (click)="setPagnationCount(20)">20</button>
+    <button (click)="setPagnationCount(50)">50</button>
+    <button (click)="setPagnationCount(100)">100</button>
+  </div>
+</div>
+<div infinite-scroll id="div3" (scrolled)="onScrollDown($event)" 
+(scrolledUp)="onScrollUp($event)">
+  <button (click)="clearSort()">Clear Sort</button>
+  <table id="tableStyle">
+    <tr>
+      <th *ngIf="visibleColumns.indexOf('name') > -1" 
+        [ngClass]="{'positive' : sortedHeader == 'name', 'negative' : sortedHeader != 'name'}">
+        <a class="triangle-up" (click)="sortData('name', 1)">
+          <i class="fa fa-sort-asc" [ngClass]="{'sortArrow' : sortedDirection == 1 && sortedHeader == 'name'}"></i>
+        </a>
+        <a class="triangle-down" (click)="sortData('name', -1)">
+          <i class="fa fa-sort-desc" [ngClass]="{'sortArrow' : sortedDirection == -1 && sortedHeader == 'name'}"></i>
+        </a>
+        Name
+      </th>
+      <th *ngIf="visibleColumns.indexOf('description') > -1" 
+        [ngClass]="{'positive' : sortedHeader == 'description','negative' : sortedHeader != 'description'}">
+        <a class="triangle-up" (click)="sortData('description', 1)">
+          <i class="fa fa-sort-asc" [ngClass]="{'sortArrow' : sortedDirection == 1 && sortedHeader == 'description'}"></i>
+        </a>
+        <a class="triangle-down" (click)="sortData('description', -1)">
+          <i class="fa fa-sort-desc" [ngClass]="{'sortArrow' : sortedDirection == -1 && sortedHeader == 'description'}"></i>
+        </a>
+        Description
+      </th>
+      <th *ngIf="visibleColumns.indexOf('location') > -1" 
+        [ngClass]="{'positive' : sortedHeader == 'location','negative' : sortedHeader != 'location'}">
+        <a class="triangle-up" (click)="sortData('location', 1)">
+          <i class="fa fa-sort-asc" [ngClass]="{'sortArrow' : sortedDirection == 1 && sortedHeader == 'location'}"></i>
+        </a>
+        <a class="triangle-down" (click)="sortData('location', -1)">
+          <i class="fa fa-sort-desc" [ngClass]="{'sortArrow' : sortedDirection == -1 && sortedHeader == 'location'}"></i>
+        </a>
+        Location
+      </th>
+      <th *ngIf="visibleColumns.indexOf('title') > -1" [ngClass]="{
+        'positive' : sortedHeader == 'title',
+        'negative' : sortedHeader != 'title'
+     }">
+        <a class="triangle-up" (click)="sortData('title', 1)">
+          <i class="fa fa-sort-asc" [ngClass]="{'sortArrow' : sortedDirection == 1 && sortedHeader == 'title'}"></i>
+        </a>
+        <a class="triangle-down" (click)="sortData('title', -1)">
+          <i class="fa fa-sort-desc" [ngClass]="{'sortArrow' : sortedDirection == -1 && sortedHeader == 'title'}"></i>
+        </a>
+        Title
+      </th>
+      <th *ngIf="visibleColumns.indexOf('link') > -1">MultiMedia Link</th>
+    </tr>
+    <tr *ngFor="let element of dataSaved">
+      <td *ngIf="visibleColumns.indexOf('name') > -1">{{element["name"]}}</td>
+      <td *ngIf="visibleColumns.indexOf('description') > -1">{{element["description"]}}</td>
+      <td *ngIf="visibleColumns.indexOf('location') > -1">{{element["location"]}}</td>
+      <td *ngIf="visibleColumns.indexOf('title') > -1">{{element["title"]}}</td>
+      <td *ngIf="visibleColumns.indexOf('link') > -1"><a href="{{element['multiMedia'][0]['url']}}" target="_blank">Link</a></td>
+    </tr>
+  </table>
+</div>
+<router-outlet></router-outlet>

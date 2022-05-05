@@ -1,0 +1,113 @@
+/* toggle in label designing */
+.toggle {
+  position : relative ;
+  display : inline-block;
+  width : 30px;
+  height : 10px;
+  background-color: gray;
+  border-radius: 20px;
+  border: 1px solid gray;
+}
+
+/* After slide changes */
+.toggle:after {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: white;
+  top: 1px;
+  left: 1px;
+  transition:  all 0.5s;
+}
+
+/* Toggle text */
+p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+}
+
+/* Checkbox checked effect */
+.checkbox:checked + .toggle::after {
+  left : 15px;
+}
+
+/* Checkbox checked toggle label bg color */
+.checkbox:checked + .toggle {
+  background-color: gray;
+}
+
+/* Checkbox vanished */
+.checkbox {
+  display : none;
+}
+#div2 {
+  position: absolute;
+  left: 80%;
+  top: 0;
+}
+#div3 {
+  position: relative;
+  margin-top: 0in;
+}
+#tableStyle {
+  width: 15.5in;
+}
+th {
+  background-color: cadetblue;
+  color: white;
+}
+.negative {
+  background-color: cadetblue;
+}
+.positive {
+  background-color: darkblue;
+}
+td {
+  text-align: center;
+}
+.fa-sort-desc {
+  position: relative;
+}
+.fa-sort-asc {
+  position: relative;
+}
+.fa:active {
+  color: red;
+}
+.sortArrow {
+  color: coral;
+}
+.check {
+  check : true;
+}
+.uncheck {
+  check : false;
+}
+.drop-show {
+  padding: 4px;
+  width: 222px;
+  background-color: #FFF;
+  border: 1px solid #BABABA;
+  position: absolute;
+  z-index: 100;
+  -webkit-box-shadow: 0 6px 10px rgba(0,0,0,.15);
+  -moz-box-shadow: 0 6px 10px rgba(0,0,0,.15);
+  box-shadow: 0 6px 10px rgba(0,0,0,.15);
+  margin-left: 1px;
+}
+a {
+  height: 0.05in;
+  width: 0.1in;
+  display: inline-flex;
+}
+.triangle-up {
+  position: relative;
+  bottom: 0.05in;
+}
+.triangle-down {
+  position: relative;
+  top: 0.05in;
+  right: 0.1in;
+}
